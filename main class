@@ -1,0 +1,66 @@
+package bank_application;
+
+import java.util.*;
+
+public class Main 
+{
+	public static void main(String args[])
+	{
+		Scanner sc = new Scanner(System.in);
+		System.out.println("-------------- Welcome to OurBank --------------");
+		System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+		System.out.println();
+		System.out.println("1)Login                 2)Create new account ");
+		System.out.print("\nChoose Option : ");
+		int o1 = sc.nextInt();
+		
+		if(o1==1)
+		{
+			//take input - name
+			System.out.print("Enter Your First Name : ");
+			sc.nextLine();
+			String uname = "";
+			boolean flag = true;
+			do
+			{
+				
+				uname = sc.next();
+				System.out.println();
+				flag = Validation.checkName(uname);
+			}
+			while(flag==false);
+			
+			//take user input password
+			System.out.print("Enter Your Password : ");
+			String id = "";
+			boolean flag2 = true;
+			do
+			{
+				id = sc.next();
+				System.out.println();
+				flag2 = Validation.checkID(id);
+			}
+			while(flag2==false);
+			
+			boolean flag3 = true;
+			flag3 = New_Account.verify(uname,id); //uname = firstname, id =password
+			if(flag3==false)
+			{
+				System.out.println("Enter Correct Details");
+				Main.main(null);
+			}
+			
+			System.out.println();
+			BankApplication obj = new BankApplication(uname,id);
+			
+			//obj.checkID(id);
+			obj.menu();
+		}
+		else if(o1==2)
+		{
+			New_Account obj2 = new New_Account(2);
+			obj2.print();
+		}
+
+	}
+}
