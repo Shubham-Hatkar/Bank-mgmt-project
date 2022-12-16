@@ -1,4 +1,4 @@
 *** this project is completely based on java ....here we are not using anything instead of java.....***
-1) we can use hashmap to store username and password
+1) we can use hashmap to store username and password and we can validate it using key and value methods of hashmap.
 2) just need some changes - when we are exiting from our project we are supposed to pres 'e' just one time but in my project we need to press 'e' 2 times so this need to be changed i will change it as i get time.
 
