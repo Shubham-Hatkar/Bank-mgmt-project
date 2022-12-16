@@ -1,0 +1,162 @@
+package bank_application;
+import java.util.*;
+public class BankApplication 
+{
+	String customer_name;
+	String customer_ID;
+	double bal = 0.0;
+	double prevTrans;
+	
+	// Constructor 
+	BankApplication(String nm, String id)
+	{
+		this.customer_name = nm;
+		this.customer_ID = id;
+	}
+	
+	//Deposite func
+	void deposit(double amt)
+	{
+		bal += amt;
+		prevTrans = amt;
+	}
+	
+	//Withdraw func
+	void withdraw(double amt)
+	{
+		if(bal>=amt)
+		{
+			bal -= amt;
+			prevTrans = -amt;
+		}
+		else
+		{
+			System.out.println("Insufficient Balance");
+		}
+	}
+	
+	//Check Previous Transaction func
+	void getPrevTrans()
+	{
+		if(prevTrans>0)
+		{
+			System.out.println("Rs. " + prevTrans + " Deposited");
+		}
+		else if(prevTrans<0)
+		{
+			System.out.println("Rs. " + Math.abs(prevTrans) + " Withdrawn");
+		}
+		else
+		{
+			System.out.println("oops!! No Transaction Occured");
+		}
+	}
+	
+	//Menu method
+	public void menu()
+	{
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.println("********************************************\n");
+		System.out.println("Welcome " + toUpperCase(customer_name) + " in OurBank");
+		System.out.println("Your Password : " + "****");
+		System.out.println("");
+		System.out.println("Options : ");
+		System.out.println("a)Check Balance ");
+		System.out.println("b)Deposite Amount ");
+		System.out.println("c)Withdraw Amount ");
+		System.out.println("d)Check Previous Transaction ");
+		System.out.println("o)Show Options ");
+		System.out.println("e)Exit ");
+		System.out.println("h)Go To Home Page ");
+		System.out.println("");
+		
+		char option;
+		boolean flag = false; // for condition e is not entered
+		while(flag==false) // if e is entered then we will change flag to true.
+		{
+			System.out.println("********************************************\n");
+			//System.out.println("(if you want to check options press 'o')");
+			System.out.print("Choose Option : ");
+			option = sc.next().charAt(0);
+			if(option=='e') // if 'e' is entered means user want to exit.
+			{
+				flag = true;
+				break;
+			} 
+			switch(option)
+			{
+				case 'a' : 
+					System.out.println("--------------------------------------------");
+					System.out.println("Current Balance : " + bal);
+					System.out.println("--------------------------------------------");
+					System.out.println("\n");
+					break;
+				case 'b' :
+					System.out.println("--------------------------------------------");
+					System.out.print("Enter an amount to deposit : ");
+					double amt = sc.nextDouble();
+					deposit(amt);
+					System.out.println("Current Balance : " + bal);
+					System.out.println("--------------------------------------------");
+					System.out.println("\n");
+					break;
+				case 'c' :
+					System.out.println("--------------------------------------------");
+					System.out.print("Enter an amount to withdraw : ");
+					double rs = sc.nextDouble();
+					withdraw(rs);
+					System.out.println("Current Balance : " + bal);
+					System.out.println("--------------------------------------------");
+					System.out.println("\n");
+					break;
+				case 'd' : 
+					System.out.println("--------------------------------------------");
+					System.out.print("Previous Transaction : ");
+					getPrevTrans();
+					System.out.println("--------------------------------------------");
+					System.out.println("\n");
+					break;
+				case 'o' :
+					System.out.println("Options : ");
+					System.out.println("a)Check Balance ");
+					System.out.println("b)Deposite Amount ");
+					System.out.println("c)Withdraw Amount ");
+					System.out.println("d)Check Previous Transaction ");
+					System.out.println("o)Show Options ");
+					System.out.println("e)Exit ");
+					System.out.println("");
+					break;
+				case 'h' :
+					Main.main(null);
+					break;
+				default :
+					System.out.println("Choose correct option to proceed ");
+			}
+		}
+		if(flag==true)
+		{
+			System.out.println("\nThank you for using our banking services \nhave a nice day.");
+			return;
+		}
+	}
+
+	//Function for uppercase
+	private String toUpperCase(String s)
+	{
+		int n = s.length();
+		String ans = "";
+		for(int i=0; i<n; i++)
+		{
+			if(s.charAt(i)>=97 && s.charAt(i)<=122)
+			{
+				ans += (char)(s.charAt(i)-32);
+			}
+			else 
+			{
+				ans += s.charAt(i);
+			}
+		}
+		return ans;
+	}
+}
