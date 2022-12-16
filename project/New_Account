@@ -1,0 +1,64 @@
+package bank_application;
+import java.util.*;
+public class New_Account
+{
+	Scanner sc = new Scanner(System.in);
+	New_Account(int n)
+	{
+		System.out.println("\n===============Welcome to OurBank===============\n");
+	}
+	
+	String nname;
+	String lname;
+	String DOB;
+	String Password;
+	static ArrayList<ArrayList<String>> A = new ArrayList<>();
+
+	void print()
+	{
+		System.out.print("Enter First Name : ");
+		nname = sc.next();
+		
+		System.out.print("Enter Last Name : ");
+		lname = sc.next();
+		
+		System.out.print("Enter DOB (dd/mm/yy) : ");
+		DOB = sc.next();
+		
+		System.out.print("Enter Password : ");
+		Password = sc.next();
+		
+		
+		ArrayList<String> temp = new ArrayList<>();
+		temp.add(nname);
+		temp.add(lname);
+		temp.add(DOB);
+		temp.add(Password);
+		A.add(temp);
+		
+		System.out.println("\nChoose Option :\n1)Save Details              2)Exit ");
+		int enter = sc.nextInt();
+		if(enter==1)
+		{
+			System.out.println("Details saved successfully\n");
+			Main.main(null);
+		}
+		else
+		{
+			System.out.println();
+			Main.main(null);
+		}
+	}
+	
+	static boolean verify(String fname, String pass)
+	{
+		for(int i=0; i<A.size(); i++)
+		{
+			if( (A.get(i).get(0)).equals(fname) && (A.get(i).get(3)).equals(pass))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+}
